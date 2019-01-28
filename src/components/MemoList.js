@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   menuList: {
     width: '100%',
     flex: 1,
-    marginTop: 78,
   },
   menuListItem: {
     padding: 16,

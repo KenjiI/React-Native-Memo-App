@@ -3,10 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class CircleButton extends React.Component {
   render() {
-    const { children = '+' } = this.props;
+    const {
+      children = '+',
+      style = {},
+      reverse = false,
+    } = this.props;
+
+    let bgColor = '#E31676';
+    let textColor = '#fff';
+
+    if (reverse) {
+      bgColor = '#fff';
+      textColor = '#E31676';
+    }
+
     return (
-      <View style={styles.memoAddButton}>
-        <Text style={styles.memoAddButtonTitle}>
+      <View style={[styles.memoAddButton, style, { backgroundColor: bgColor }]}>
+        <Text style={[styles.memoAddButtonTitle, { color: textColor }]}>
           { children }
         </Text>
       </View>
@@ -16,7 +29,6 @@ export default class CircleButton extends React.Component {
 
 const styles = StyleSheet.create({
   memoAddButton: {
-    backgroundColor: '#E31676',
     width: 48,
     height: 48,
     position: 'absolute',
@@ -33,6 +45,5 @@ const styles = StyleSheet.create({
   memoAddButtonTitle: {
     fontSize: 32,
     lineHeight: 32,
-    color: 'white',
   },
 });
