@@ -17,7 +17,7 @@ export default class MemoDetailScreen extends React.Component {
           <Text>じじじじ</Text>
         </View>
 
-        <CircleButton reverse="true" style={styles.editButton}>+</CircleButton>
+        <CircleButton name="pencil" reverse="true" style={styles.editButton} />
       </View>
     );
   }
