@@ -3,16 +3,15 @@ import {
   StyleSheet, TextInput, Text, View, TouchableHighlight,
 } from 'react-native';
 
-
-export default class LoginScreen extends React.Component {
+export default class SignupScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.loginTitle}>ログイン</Text>
+        <Text style={styles.loginTitle}>メンバー登録</Text>
         <TextInput style={styles.input} value="Email Address" />
         <TextInput style={styles.input} value="Password" />
         <TouchableHighlight style={styles.loginButton} onPress={() => {}} underlayColor="#C70F66">
-          <Text style={styles.buttonTitle}>ログインする</Text>
+          <Text style={styles.buttonTitle}>登録する</Text>
         </TouchableHighlight>
       </View>
     );
