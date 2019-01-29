@@ -7,9 +7,16 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 
-import config from './secret';
+import ENV from './env.json';
 
-firebase.initializeApp(config);
+firebase.initializeApp({
+  apiKey: ENV.API_KEY,
+  authDomain: ENV.AUTH_DOMAIN,
+  databaseURL: ENV.DATABASE_URL,
+  projectId: ENV.PROJECT_ID,
+  storageBucket: ENV.STORAGE_BUCKET,
+  messagingSenderId: ENV.MESSAGE_SENDER_ID,
+});
 
 const MainNavigator = createStackNavigator({
   Login: { screen: LoginScreen },
