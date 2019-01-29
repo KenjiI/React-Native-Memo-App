@@ -6,37 +6,45 @@ import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
 
 export default class MemoListScreen extends React.Component {
+  state = {
+    memoList: [],
+  }
+
   constructor(props) {
     super(props);
     this.handleOnCreate = this.handleOnCreate.bind(this);
   }
 
-  handleOnCreate() {
-    // eslint-disable-next-line
-    const { navigation } = this.props;
+  componentWillMount() {
     const db = firebase.firestore();
-    const { currentUser } = navigation.state.params;
+    const { currentUser } = firebase.auth();
 
-    db.collection(`/user/${currentUser.user.uid}/memos/`).add({
-      body: 'memo body 22',
-      createdOn: '2019/01/29',
-      title: 'memoTitle',
-    })
-    .then((docRef) => {
+    db.collection(`/user/${currentUser.uid}/memos/`)
+      .get()
+      .then((querySnapshot) => {
+        const memoList = [];
+        querySnapshot.forEach((doc) => {
+          memoList.push({ ...doc.data(), key: doc.id });
+        });
+        console.log(memoList);
+        this.setState({ memoList });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    })
-    .catch((error) => {
-
-    });
-
-    // navigation.navigate('MemoEdit');
+  handleOnCreate() {
+    const { navigation } = this.props;
+    navigation.navigate('MemoCreate');
   }
 
   render() {
     const { navigation } = this.props;
+    const { memoList } = this.state;
     return (
       <View style={styles.container}>
-        <MemoList navigation={navigation} />
+        <MemoList navigation={navigation} memoList={memoList} />
         <CircleButton name="plus" onPress={this.handleOnCreate} />
       </View>
     );

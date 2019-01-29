@@ -1,35 +1,40 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, TouchableHighlight,
+  StyleSheet, Text, View, TouchableHighlight, FlatList,
 } from 'react-native';
 
 export default class MemoList extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.renderMemo = this.renderMemo.bind(this);
+  }
+
+  renderMemo({ item }) {
     const { navigation } = this.props;
+
+    return (
+      <TouchableHighlight
+        onPress={() => navigation.navigate('MemoDetail')}
+        underlayColor="transparent"
+      >
+        <View style={styles.menuListItem}>
+          <Text style={styles.menuItemTitle}>{item.body}</Text>
+          <Text style={styles.menuItemDate}>{item.body}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  render() {
+    const { memoList } = this.props;
+    // const outputList = [];
+    // console.log(memoList);
+    // memoList.forEach((memo) => {
+    //   outputList.push(this.renderMemo(memo));
+    // });
     return (
       <View style={styles.menuList}>
-        <TouchableHighlight onPress={() => navigation.navigate('MemoDetail')} underlayColor="transparent">
-          <View style={styles.menuListItem}>
-            <Text style={styles.menuItemTitle}>リストのサンプル</Text>
-            <Text style={styles.menuItemDate}>2019/01/20</Text>
-          </View>
-        </TouchableHighlight>
-        <View style={styles.menuListItem}>
-          <Text style={styles.menuItemTitle}>リストのサンプル</Text>
-          <Text style={styles.menuItemDate}>2019/01/20</Text>
-        </View>
-        <View style={styles.menuListItem}>
-          <Text style={styles.menuItemTitle}>リストのサンプル</Text>
-          <Text style={styles.menuItemDate}>2019/01/20</Text>
-        </View>
-        <View style={styles.menuListItem}>
-          <Text style={styles.menuItemTitle}>リストのサンプル</Text>
-          <Text style={styles.menuItemDate}>2019/01/20</Text>
-        </View>
-        <View style={styles.menuListItem}>
-          <Text style={styles.menuItemTitle}>リストのサンプル</Text>
-          <Text style={styles.menuItemDate}>2019/01/20</Text>
-        </View>
+        <FlatList data={memoList} renderItem={this.renderMemo} />
       </View>
     );
   }
