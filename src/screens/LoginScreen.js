@@ -10,8 +10,18 @@ export default class LoginScreen extends React.Component {
     password: '',
   }
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  handleOnSubmit() {
     const { navigation } = this.props;
+
+    navigation.navigate('Home');
+  }
+
+  render() {
     const { email, password } = this.state;
 
     return (
@@ -36,7 +46,7 @@ export default class LoginScreen extends React.Component {
         />
         <TouchableHighlight
           style={styles.loginButton}
-          onPress={() => navigation.navigate('Home')}
+          onPress={this.handleOnSubmit}
           underlayColor="#C70F66"
         >
           <Text style={styles.buttonTitle}>ログインする</Text>
