@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableHighlight } from 'react-native';
 import { Font } from 'expo';
 import { createIconSet } from '@expo/vector-icons';
 import FontAwesome from '../../assets/fonts/fa-solid-900.ttf';
@@ -25,6 +25,7 @@ export default class CircleButton extends React.Component {
       name,
       style = {},
       reverse = false,
+      onPress,
     } = this.props;
     const { fontLoaded } = this.state;
 
@@ -37,24 +38,31 @@ export default class CircleButton extends React.Component {
     }
 
     return (
-      <View style={[styles.memoAddButton, style, { backgroundColor: bgColor }]}>
-        {
-          fontLoaded ? (
-            <CustomIcon name={name} style={[styles.memoAddButtonTitle, { color: textColor }]} />
-          ) : null
-        }
-      </View>
+      <TouchableHighlight style={[styles.container, style]} onPress={onPress} underlayColor="transparent">
+        <View style={[styles.memoAddButton, { backgroundColor: bgColor }]}>
+          {
+            fontLoaded ? (
+              <CustomIcon name={name} style={[styles.memoAddButtonTitle, { color: textColor }]} />
+            ) : null
+          }
+        </View>
+      </TouchableHighlight>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  memoAddButton: {
-    width: 48,
-    height: 48,
+  container: {
     position: 'absolute',
     bottom: 32,
     right: 32,
+    borderRadius: 24,
+    width: 48,
+    height: 48,
+  },
+  memoAddButton: {
+    width: 48,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 24,
