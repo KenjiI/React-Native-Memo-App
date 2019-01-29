@@ -9,6 +9,8 @@ import SignupScreen from './src/screens/SignupScreen';
 
 import ENV from './env.json';
 
+require('firebase/firestore');
+
 firebase.initializeApp({
   apiKey: ENV.API_KEY,
   authDomain: ENV.AUTH_DOMAIN,
