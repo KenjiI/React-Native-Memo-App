@@ -3,6 +3,8 @@ import {
   StyleSheet, Text, View, TouchableHighlight, FlatList,
 } from 'react-native';
 
+import { timestampToDate } from '../utils';
+
 export default class MemoList extends React.Component {
   constructor(props) {
     super(props);
@@ -14,12 +16,12 @@ export default class MemoList extends React.Component {
 
     return (
       <TouchableHighlight
-        onPress={() => navigation.navigate('MemoDetail')}
+        onPress={() => navigation.navigate('MemoDetail', { item })}
         underlayColor="transparent"
       >
         <View style={styles.menuListItem}>
-          <Text style={styles.menuItemTitle}>{item.body}</Text>
-          <Text style={styles.menuItemDate}>{item.body}</Text>
+          <Text style={styles.menuItemTitle}>{item.body.substring(0, 12)}</Text>
+          <Text style={styles.menuItemDate}>{timestampToDate(item.createdOn)}</Text>
         </View>
       </TouchableHighlight>
     );
@@ -27,11 +29,6 @@ export default class MemoList extends React.Component {
 
   render() {
     const { memoList } = this.props;
-    // const outputList = [];
-    // console.log(memoList);
-    // memoList.forEach((memo) => {
-    //   outputList.push(this.renderMemo(memo));
-    // });
     return (
       <View style={styles.menuList}>
         <FlatList data={memoList} renderItem={this.renderMemo} />

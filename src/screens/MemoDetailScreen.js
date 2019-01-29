@@ -1,21 +1,36 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CircleButton from '../elements/CircleButton';
+import { timestampToDate } from '../utils';
 
 export default class MemoDetailScreen extends React.Component {
+  state = {
+    memo: {},
+  }
+
+  componentWillMount() {
+    const { navigation } = this.props;
+    const { item } = navigation.state.params;
+    this.setState({ memo: item });
+  }
+
   render() {
     const { navigation } = this.props;
+    const { memo } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
           <View>
-            <Text style={styles.memoHeaderTitle}>タイトル</Text>
-            <Text style={styles.memoHeaderDate}>日付</Text>
+            <Text style={styles.memoHeaderTitle}>{memo.body.substring(0, 12)}</Text>
+            <Text style={styles.memoHeaderDate}>{timestampToDate(memo.createdOn)}</Text>
           </View>
         </View>
 
         <View style={styles.memoContent}>
-          <Text>じじじじ</Text>
+          <Text style={styles.memoBody}>
+            {memo.body}
+          </Text>
         </View>
 
         <CircleButton
@@ -60,5 +75,9 @@ const styles = StyleSheet.create({
   editButton: {
     top: 75,
     backgroundColor: 'white',
+  },
+  memoBody: {
+    fontSize: 15,
+    lineHeight: 22,
   },
 });
