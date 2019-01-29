@@ -7,8 +7,8 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
 
-const config = {
-};
+import config from './secret';
+
 firebase.initializeApp(config);
 
 const MainNavigator = createStackNavigator({
