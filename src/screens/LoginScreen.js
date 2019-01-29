@@ -20,6 +20,7 @@ export default class LoginScreen extends React.Component {
     const { email, password } = this.state;
 
     firebase.auth().signInWithEmailAndPassword(email, password)
+      // eslint-disable-next-line
       .then((user) => {
         navigation.navigate('Home');
       })

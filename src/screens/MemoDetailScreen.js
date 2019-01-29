@@ -37,7 +37,7 @@ export default class MemoDetailScreen extends React.Component {
           name="pencil"
           reverse="true"
           style={styles.editButton}
-          onPress={() => navigation.navigate('MemoEdit')}
+          onPress={() => navigation.navigate('MemoEdit', { memo })}
         />
       </View>
     );

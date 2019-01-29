@@ -21,6 +21,7 @@ export default class SignupScreen extends React.Component {
     const { email, password } = this.state;
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
+      // eslint-disable-next-line
       .then((user) => {
         navigation.navigate('Home');
       })
