@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    backgroundColor: '#fff',
   },
   menuItemTitle: {
     fontSize: 18,

@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  StyleSheet, TextInput, Text, View, TouchableHighlight,
+  StyleSheet, TextInput, Text, View, TouchableHighlight, TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
   state = {
@@ -13,6 +14,7 @@ export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.handleOnSignup = this.handleOnSignup.bind(this);
   }
 
   handleOnSubmit() {
@@ -22,11 +24,22 @@ export default class LoginScreen extends React.Component {
     firebase.auth().signInWithEmailAndPassword(email, password)
       // eslint-disable-next-line
       .then((user) => {
-        navigation.navigate('Home');
+        const resetActions = StackActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' }),
+          ],
+        });
+        navigation.dispatch(resetActions);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  handleOnSignup() {
+    const { navigation } = this.props;
+    navigation.navigate('Signup');
   }
 
   render() {
@@ -59,6 +72,10 @@ export default class LoginScreen extends React.Component {
         >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity style={styles.signup} onPress={this.handleOnSignup}>
+          <Text style={styles.signupTitle}>メンバー登録</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -95,5 +112,12 @@ const styles = StyleSheet.create({
   buttonTitle: {
     color: 'white',
     fontSize: 18,
+  },
+  signup: {
+    marginTop: 16,
+    alignSelf: 'center',
+  },
+  signupTitle: {
+    fontSize: 16,
   },
 });

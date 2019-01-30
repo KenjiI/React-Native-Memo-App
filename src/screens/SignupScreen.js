@@ -3,7 +3,7 @@ import {
   StyleSheet, TextInput, Text, View, TouchableHighlight,
 } from 'react-native';
 import firebase from 'firebase';
-
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class SignupScreen extends React.Component {
   state = {
@@ -23,7 +23,13 @@ export default class SignupScreen extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       // eslint-disable-next-line
       .then((user) => {
-        navigation.navigate('Home');
+        const resetActions = StackActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' }),
+          ],
+        });
+        navigation.dispatch(resetActions);
       })
       .catch((error) => {
         console.log(error);
