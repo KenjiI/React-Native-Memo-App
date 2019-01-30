@@ -22,7 +22,9 @@ export default class MemoEditScreen extends React.Component {
 
   handleOnSubmit() {
     const { navigation } = this.props;
+    const { refreshMemo } = navigation.state.params;
     const { memo } = this.state;
+
     const newDate = firebase.firestore.Timestamp.now();
     const db = firebase.firestore();
     const { currentUser } = firebase.auth();
@@ -34,6 +36,7 @@ export default class MemoEditScreen extends React.Component {
       })
       .then(() => {
         console.log('success');
+        refreshMemo({ ...memo, createdOn: newDate });
         navigation.goBack();
       })
       .catch((error) => {

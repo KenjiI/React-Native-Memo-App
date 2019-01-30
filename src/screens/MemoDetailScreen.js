@@ -37,7 +37,12 @@ export default class MemoDetailScreen extends React.Component {
           name="pencil"
           reverse="true"
           style={styles.editButton}
-          onPress={() => navigation.navigate('MemoEdit', { memo })}
+          onPress={
+            () => navigation.navigate(
+              'MemoEdit',
+              { memo, refreshMemo: newMemo => this.setState({ memo: newMemo }) },
+            )
+          }
         />
       </View>
     );
@@ -78,6 +83,6 @@ const styles = StyleSheet.create({
   },
   memoBody: {
     fontSize: 15,
-    lineHeight: 22,
+    lineHeight: 24,
   },
 });
