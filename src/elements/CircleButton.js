@@ -54,8 +54,8 @@ export default class CircleButton extends React.Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 32,
-    right: 32,
+    bottom: 24,
+    right: 24,
     borderRadius: 24,
     width: 48,
     height: 48,
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 8,
   },
   memoAddButtonTitle: {
     fontFamily: 'FontAwesome',

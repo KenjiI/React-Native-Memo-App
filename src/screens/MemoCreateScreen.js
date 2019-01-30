@@ -44,6 +44,7 @@ export default class MemoCreateScreen extends React.Component {
           value={body}
           placeholder="Please enter your new memo..."
           onChangeText={text => this.setState({ body: text })}
+          textAlignVertical="top"
         />
         <CircleButton name="check" style={styles.editButton} onPress={this.handleOnSubmit} />
       </View>

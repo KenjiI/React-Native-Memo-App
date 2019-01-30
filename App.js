@@ -39,6 +39,7 @@ const MainNavigator = createStackNavigator({
       shadowColor: '#000',
       shadowOpacity: 0.5,
       shadowRadius: 3,
+      elevation: 8,
     },
     headerTitleStyle: {
       color: '#fff',
